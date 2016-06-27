@@ -10,3 +10,20 @@ iptables -A INPUT -i eth0 -d 10.1.10.0/24 -j DROP
 iptables -A INPUT -i eth0 -d 172.16.0.0/12 -j DROP
 
 # This is a test firewall file for OpenWRT, to try and block network access to private IPs over the ETH0 Interface (Interface that connects to client's LAN)
+
+=================================================================================================================================
+
+Alternate Configuration Option
+
+# We need to test if we should use -A OUTPUT or -A INPUT
+
+# This file is interpreted as shell script.
+# Put your custom iptables rules here, they will
+# be executed with each firewall (re-)start.
+
+# Internal uci firewall chains are flushed and recreated on reload, so
+# put custom rules into the root chains e.g. INPUT or FORWARD or into the
+# special user chains, e.g. input_wan_rule or postrouting_lan_rule.
+iptables -A OUTPUT -i eth0 -d 192.168.0.0/16 -j DROP
+iptables -A OUTPUT -i eth0 -d 10.1.10.0/24 -j DROP
+iptables -A OUTPUT -i eth0 -d 172.16.0.0/12 -j DROP
